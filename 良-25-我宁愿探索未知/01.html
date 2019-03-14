@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>探索</title>
+    <style>
+        *{margin:0;padding:0;}
+        li{list-style:none;}
+        a{text-decoration: none;}
+        div{
+            position: absolute;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        let arr2=[];
+        document.onclick=function(){
+            let round=document.createElement("div"),
+                speedX=Math.ceil(Math.random()*10),
+                speedY=Math.ceil(Math.random()*10),
+                arr=Math.floor((Math.random()+0.5)*5)*10,
+                leftX=0,
+                topY=0;
+                changeColor()
+                round.style.backgroundColor=`rgba(${arr2[0]},${arr2[1]},${arr2[2]},${arr2[3]})`
+                round.style.width=arr+"px";
+                round.style.height=round.style.width;
+                console.log(arr);
+                document.documentElement.appendChild(round)
+                run()
+                function run(){
+                    let maxX=document.documentElement.clientWidth-arr,
+                        maxY=document.documentElement.clientHeight-arr;
+                    leftX+=speedX;
+                    topY+=speedY;
+                    leftX=Math.min(maxX,leftX);
+                    leftX=Math.max(0,leftX);
+                    topY=Math.min(maxY,topY);
+                    topY=Math.max(0,topY);
+                    round.style.top=topY+"px";
+                    round.style.left=leftX+"px";
+                    if(leftX===0||leftX===maxX){
+                        speedX=-speedX;
+                        changeColor()
+                        round.style.backgroundColor=`rgba(${arr2[0]},${arr2[1]},${arr2[2]},${arr2[3]})`
+                    }
+                    if(topY===0||topY===maxY){
+                        speedY=-speedY;
+                        changeColor()
+                        round.style.backgroundColor=`rgba(${arr2[0]},${arr2[1]},${arr2[2]},${arr2[3]})`
+                    }
+                    requestAnimationFrame(run)
+                }
+            }
+        window.onresize=function(){
+            maxX=document.documentElement.clientWidth;
+            maxY=document.documentElement.clientHeight;
+            console.log(maxX,maxY);
+            
+        }
+        function changeColor(){
+                let r=Math.floor(Math.random()*256);
+                let g=Math.floor(Math.random()*256);
+                let b=Math.floor(Math.random()*256);
+                let a=Math.random().toFixed(1);
+                return arr2=[r,g,b,a]
+        }
+        
+
+        
+    </script>
+</body>
+<html>
